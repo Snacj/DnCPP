@@ -1,0 +1,16 @@
+SRC_DIR = src
+OBJS = $(SRC_DIR)/main.cpp
+OBJ_NAME = main
+CC = g++
+CFLAGS = -std=c++11 -w
+LDFLAGS = `sdl2-config --libs` -lSDL2_image
+
+all: $(OBJS)
+	@echo "Compiling..."
+	$(CC) $(CFLAGS) $(OBJS) -o $(OBJ_NAME) $(LDFLAGS)
+	@echo "Done."
+
+clean: 
+	@echo "Cleaning up..."
+	rm -f $(OBJ_NAME)
+	@echo "Done."
