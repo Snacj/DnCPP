@@ -77,7 +77,6 @@ void Player::update()
         currentAnimationFrame = (currentAnimationFrame + 1) % 2;
     }
 
-
     float dx = 0;
     float dy = 0;
 

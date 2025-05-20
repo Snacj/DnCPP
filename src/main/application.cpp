@@ -13,6 +13,11 @@
 TileManager tileManager;
 Player player;
 
+enum gameState {
+    MENU,
+    GAME,
+};
+
 Application::Application()
 {
 
@@ -23,7 +28,9 @@ void Application::setup()
     // Setup Textures
     player.loadSprites();
     player.setup();
+    tileManager.loadMap("assets/maps/map.txt");
     tileManager.loadSprites();
+    gameState = GAME;
 }
 
 void Application::run()
@@ -64,7 +71,13 @@ void Application::draw()
 {
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
     SDL_RenderClear(gRenderer);
-    tileManager.drawTiles();
-    player.draw();
+
+    if(gameState == GAME) {
+        tileManager.drawTiles();
+        player.draw();
+    } else if(gameState == MENU) {
+
+    } 
+
     SDL_RenderPresent(gRenderer);
 }

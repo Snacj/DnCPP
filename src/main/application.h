@@ -12,6 +12,7 @@ private:
     void draw();
 
     std::thread gameThread;
+    int gameState;
 
 public:
     Application();
