@@ -69,7 +69,7 @@ void Application::update()
 
 void Application::draw()
 {
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+    SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(gRenderer);
 
     if(gameState == GAME) {
@@ -80,4 +80,8 @@ void Application::draw()
     } 
 
     SDL_RenderPresent(gRenderer);
+}
+
+Player& Application::getPlayer() {
+    return player;
 }

@@ -4,6 +4,8 @@
 #include <SDL2/SDL.h>
 #include <thread>
 
+#include "../entities/player.h"
+
 
 class Application
 {
@@ -17,6 +19,7 @@ private:
 public:
     Application();
 
+    Player& getPlayer();
     void setup();
     void run();
 };

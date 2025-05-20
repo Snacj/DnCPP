@@ -10,9 +10,6 @@
 class Player
 {
 private:
-    // position
-    int x,y;
-
     // speed
     int speed;
 
@@ -40,6 +37,10 @@ public:
     void setup();
     void update();
     void draw();
+
+    // position
+    int worldX, worldY;
+    int screenX, screenY;
 };
 
 #endif

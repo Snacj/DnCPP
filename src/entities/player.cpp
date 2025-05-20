@@ -28,8 +28,16 @@ void Player::setup()
     speed = 3;
     texture = textures[10];
 
-    rect.x = 10;
-    rect.y = 10;
+    // Camera
+    screenX = SCREEN_WIDTH / 2 - (TILE_SIZE / 2); 
+    screenY = SCREEN_HEIGHT / 2 - (TILE_SIZE / 2); 
+
+    // Spawnpoint
+    worldX = 10 * TILE_SIZE;
+    worldY = 10 * TILE_SIZE;
+
+    rect.x = screenX;
+    rect.y = screenY;
     rect.w = TILE_SIZE;
     rect.h = TILE_SIZE;
     solidArea.w = TILE_SIZE / 2;
@@ -158,37 +166,13 @@ void Player::update()
         dy *= 0.7071f;
     }
 
-    // Check for collisions with the stone
-    SDL_Rect futureRect = rect;
-    futureRect.x += dx * speed;
-    //SDL_Rect futureSolid = {
-    //    futureRect.x + (rect.w - solidArea.w) / 2,
-    //    futureRect.y + (rect.h - solidArea.h),
-    //    solidArea.w,
-    //    solidArea.h
-    //};
-
-    //if (checkCollision(futureSolid, stoneRect1) == 0) {
-        rect.x = futureRect.x;
-    //}
-
-    futureRect = rect;
-    futureRect.y += dy * speed;
-    //futureSolid.x = futureRect.x + (rect.w - solidArea.w) / 2;
-    //futureSolid.y = futureRect.y + (rect.h - solidArea.h);
-
-    //if (checkCollision(futureSolid, stoneRect1) == 0) {
-        rect.y = futureRect.y;
-    //}
-
-    solidArea.x = rect.x + (rect.w - solidArea.w) / 2;
-    solidArea.y = rect.y + (rect.h - solidArea.h);
+    worldX += dx * speed;
+    worldY += dy * speed;
 }
 
 
 void Player::draw()
 {
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
     SDL_RenderCopy(gRenderer, texture, NULL, &rect);
     // debug
     if (debug) {
