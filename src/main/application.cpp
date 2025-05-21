@@ -32,7 +32,7 @@ void Application::setup()
     ui.loadSprites();
     ui.createUIElements();
 
-    gameState = GAME;
+    gameState = MENU;
 }
 
 void Application::run()
