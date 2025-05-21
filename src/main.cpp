@@ -11,6 +11,8 @@
 #include "main/application.h"
 #include "utils/globals.h"
 
+Application app;
+
 //Starts up SDL and creates window
 bool init();
 
@@ -62,7 +64,7 @@ bool init()
 
 void close()
 {
-	//Destroy window	
+	//Destroy window
 	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
 
@@ -79,8 +81,6 @@ int main( int argc, char* args[] )
 		printf( "Failed to initialize!\n" );
         return EXIT_FAILURE;
 	} else {
-        Application app;
-
         app.setup();
         app.run();
     }

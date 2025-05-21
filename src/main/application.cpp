@@ -7,16 +7,12 @@
 
 #include "application.h"
 #include "../tiles/tilemanager.h"
-#include "../utils/globals.h"
 #include "../entities/player.h"
+#include "../ui/ui.h"
 
 TileManager tileManager;
 Player player;
-
-enum gameState {
-    MENU,
-    GAME,
-};
+UI ui;
 
 Application::Application()
 {
@@ -25,19 +21,22 @@ Application::Application()
 
 void Application::setup()
 {
-    // Setup Textures
+    // Setup
+    // player
     player.loadSprites();
     player.setup();
-    tileManager.loadMap("assets/maps/map.txt");
+    // tileManager
     tileManager.loadSprites();
+    tileManager.loadMap("assets/maps/map.txt");
+    // ui
+    ui.loadSprites();
+    ui.createUIElements();
+
     gameState = GAME;
 }
 
 void Application::run()
 {
-    // Running Flag
-    bool quit = false;
-
     // Event Handler
     SDL_Event e;
 
@@ -50,8 +49,14 @@ void Application::run()
         while( SDL_PollEvent( &e ) != 0)
         {
             // Allows the user to quit
-            if ( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+            if ( e.type == SDL_QUIT )
                 quit = true;
+            if ( e.key.keysym.sym == SDLK_ESCAPE )
+                gameState = MENU;
+            if ( e.key.keysym.sym == SDLK_RETURN )
+                gameState = GAME;
+            if ( gameState == MENU)
+                ui.handleMainMenuEvents(&e);
         }
         update();
         draw();
@@ -76,12 +81,13 @@ void Application::draw()
         tileManager.drawTiles();
         player.draw();
     } else if(gameState == MENU) {
-
-    } 
+        ui.draw();
+    }
 
     SDL_RenderPresent(gRenderer);
 }
 
-Player& Application::getPlayer() {
+Player& Application::getPlayer()
+{
     return player;
 }

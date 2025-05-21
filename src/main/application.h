@@ -6,6 +6,10 @@
 
 #include "../entities/player.h"
 
+enum gameState {
+    MENU,
+    GAME,
+};
 
 class Application
 {
@@ -14,7 +18,6 @@ private:
     void draw();
 
     std::thread gameThread;
-    int gameState;
 
 public:
     Application();
@@ -22,6 +25,9 @@ public:
     Player& getPlayer();
     void setup();
     void run();
+
+    bool quit;
+    int gameState;
 };
 
 #endif

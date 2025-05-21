@@ -17,6 +17,9 @@
 #define SCREEN_WIDTH SCREEN_COLS * TILE_SIZE
 #define SCREEN_HEIGHT SCREEN_ROWS * TILE_SIZE
 
+class Application;
+extern Application app;
+
 extern SDL_Window* gWindow;
 extern SDL_Renderer* gRenderer;
 extern TextureLoader tl;

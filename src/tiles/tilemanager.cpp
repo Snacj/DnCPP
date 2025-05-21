@@ -11,13 +11,13 @@
 #include "../main/application.h"
 #include "tilemanager.h"
 
-Application app;
-
-TileManager::TileManager() {
+TileManager::TileManager()
+{
 
 }
 
-void TileManager::loadMap( std::string path ) {
+void TileManager::loadMap( std::string path )
+{
 
     std::ifstream file(path);
 
@@ -55,7 +55,8 @@ void TileManager::loadSprites()
 
 }
 
-void TileManager::drawTiles() {
+void TileManager::drawTiles()
+{
     int worldCol = 0;
     int worldRow = 0;
     SDL_Rect destRect;
@@ -77,7 +78,7 @@ void TileManager::drawTiles() {
             destRect.x = screenX;
             destRect.y = screenY;
             SDL_RenderCopy(gRenderer, textures[tileNum], NULL, &destRect);
-            
+
         }
 
         worldCol++;
@@ -87,13 +88,4 @@ void TileManager::drawTiles() {
         }
 
     }
-
-
-    //for (size_t i = 0; i < map.size(); i++) {
-    //    for (size_t j = 0; j < map[i].size(); j++) {
-    //        SDL_Rect destRect = { (int)i * TILE_SIZE, (int)j * TILE_SIZE, TILE_SIZE, TILE_SIZE};
-    //        SDL_RenderCopy(gRenderer, textures[map[i][j]], NULL, &destRect);
-    //    }
-    //}
 }
-
