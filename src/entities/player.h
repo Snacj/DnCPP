@@ -2,21 +2,23 @@
 #define PLAYER_H
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_render.h>
 #include <vector>
 
 #include "../utils/globals.h"
 
-class Player
-{
+enum direction{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+};
+
+class Player{
 private:
-    // speed
-    int speed;
 
     // animation
     int animationTimer;
     int currentAnimationFrame;
-    int direction;
     bool idle;
 
     // DEBUG
@@ -28,7 +30,7 @@ private:
 
     // Player
     SDL_Rect rect;
-    SDL_Rect solidArea;
+    SDL_Rect debugSolidArea;
 
 public:
     Player();
@@ -38,9 +40,18 @@ public:
     void update();
     void draw();
 
+    // speed
+    int speed;
+
     // position
     int worldX, worldY;
     int screenX, screenY;
+
+    int direction;
+
+    // collision
+    bool collisionOn;
+    SDL_Rect solidArea;
 };
 
 #endif

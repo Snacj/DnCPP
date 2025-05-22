@@ -18,7 +18,6 @@ TileManager::TileManager()
 
 void TileManager::loadMap( std::string path )
 {
-
     std::ifstream file(path);
 
     if (!file.is_open()) printf("Error opening Map file.");
@@ -41,7 +40,6 @@ void TileManager::loadMap( std::string path )
     }
 
     file.close();
-
 }
 
 void TileManager::loadSprites()

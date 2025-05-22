@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <thread>
 
+#include "collisionChecker.h"
 #include "../entities/player.h"
 
 enum gameState {
@@ -23,6 +24,7 @@ public:
     Application();
 
     Player& getPlayer();
+    CollisionChecker& getCollisionChecker();
     void setup();
     void run();
 

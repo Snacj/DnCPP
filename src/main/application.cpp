@@ -10,6 +10,8 @@
 #include "../entities/player.h"
 #include "../ui/ui.h"
 
+
+CollisionChecker collisionChecker;
 TileManager tileManager;
 Player player;
 UI ui;
@@ -28,6 +30,7 @@ void Application::setup()
     // tileManager
     tileManager.loadSprites();
     tileManager.loadMap("assets/maps/map.txt");
+    collisionChecker.loadCollisionMap("assets/maps/collisionMap.txt");
     // ui
     ui.loadSprites();
     ui.createUIElements();
@@ -90,4 +93,9 @@ void Application::draw()
 Player& Application::getPlayer()
 {
     return player;
+}
+
+CollisionChecker& Application::getCollisionChecker()
+{
+    return collisionChecker;
 }

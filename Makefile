@@ -14,7 +14,7 @@ OBJ_NAME = main
 
 # Compiler and flags
 CC = g++
-CFLAGS = -std=c++20 -Wall -MMD -MP $(addprefix -I, $(shell find $(SRC_DIR) -type d))
+CFLAGS = -std=c++20 -Wall -Wextra -g -MMD -MP $(addprefix -I, $(shell find $(SRC_DIR) -type d))
 LDFLAGS = `sdl2-config --libs` -lSDL2_image
 
 # Targets

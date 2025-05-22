@@ -5,15 +5,9 @@
 #include <vector>
 
 #include "player.h"
+#include "../main/application.h"
 #include "../utils/textureLoader.h"
 #include "../utils/globals.h"
-
-enum direction{
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
-};
 
 Player::Player()
 {
@@ -29,28 +23,31 @@ void Player::setup()
     texture = textures[10];
 
     // Camera
-    screenX = SCREEN_WIDTH / 2 - (TILE_SIZE / 2); 
-    screenY = SCREEN_HEIGHT / 2 - (TILE_SIZE / 2); 
+    screenX = SCREEN_WIDTH / 2 - (TILE_SIZE / 2);
+    screenY = SCREEN_HEIGHT / 2 - (TILE_SIZE / 2);
 
     // Spawnpoint
-    worldX = 10 * TILE_SIZE;
-    worldY = 10 * TILE_SIZE;
+    worldX = 20 * TILE_SIZE;
+    worldY = 20 * TILE_SIZE;
 
     rect.x = screenX;
     rect.y = screenY;
     rect.w = TILE_SIZE;
     rect.h = TILE_SIZE;
-    solidArea.w = TILE_SIZE / 2;
-    solidArea.h = TILE_SIZE / 2;
+    solidArea.w = 24;
+    solidArea.h = 28;
 
-    solidArea.x = rect.x + (rect.w - solidArea.w) / 2;
-    solidArea.y = rect.y + rect.h + solidArea.h;
-    
+    solidArea.x = 12;
+    solidArea.y = 20;
+
+    debugSolidArea = { screenX+solidArea.x, screenY+solidArea.y,
+    solidArea.w, solidArea.h};
+
 }
 
 void Player::loadSprites()
 {
-    
+
     std::vector<std::string> sprites;
 
     sprites.push_back("player_up_1");
@@ -70,7 +67,7 @@ void Player::loadSprites()
     sprites.push_back("player_right_idle_1");
     sprites.push_back("player_right_idle_2");
 
-    textures = tl.loadMedia(sprites); 
+    textures = tl.loadMedia(sprites);
 
 }
 
@@ -84,6 +81,8 @@ void Player::update()
         animationTimer = 0;
         currentAnimationFrame = (currentAnimationFrame + 1) % 2;
     }
+
+    collisionOn = false;
 
     float dx = 0;
     float dy = 0;
@@ -166,16 +165,20 @@ void Player::update()
         dy *= 0.7071f;
     }
 
-    worldX += dx * speed;
-    worldY += dy * speed;
-}
+    app.getCollisionChecker().checkTileCollision(this);
 
+    if (!collisionOn) {
+        worldX += dx * speed;
+        worldY += dy * speed;
+    }
+}
 
 void Player::draw()
 {
     SDL_RenderCopy(gRenderer, texture, NULL, &rect);
     // debug
     if (debug) {
-        SDL_RenderDrawRect(gRenderer, &solidArea);
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xAA);
+        SDL_RenderFillRect(gRenderer, &debugSolidArea);
     }
 }
