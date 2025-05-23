@@ -47,6 +47,7 @@ void TileManager::loadSprites()
     tiles.push_back("grass");
     tiles.push_back("dirt");
     tiles.push_back("stone");
+    tiles.push_back("wall");
     tiles.push_back("tree");
 
     textures = tl.loadMedia(tiles);

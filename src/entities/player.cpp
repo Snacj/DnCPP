@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_render.h>
+#include <cstdio>
 #include <string>
 #include <vector>
 
@@ -34,9 +35,9 @@ void Player::setup()
     rect.y = screenY;
     rect.w = TILE_SIZE;
     rect.h = TILE_SIZE;
+
     solidArea.w = 24;
     solidArea.h = 28;
-
     solidArea.x = 12;
     solidArea.y = 20;
 
@@ -87,43 +88,48 @@ void Player::update()
     float dx = 0;
     float dy = 0;
 
+    // TODO Fix this later to allow diagonal Movement:
+    // currently it breaks the collisionCheker
+    // TODO replace else if with if statement
+
     // Handle Keyboard input
     if (keystates[SDL_SCANCODE_W]) {
         direction = UP;
-        dy = -1.0f;
+        dy -= 1.0f;
         if (currentAnimationFrame == 0) {
             texture = textures[0];
         } else {
             texture = textures[1];
         }
     }
-    if (keystates[SDL_SCANCODE_S]) {
+    else if (keystates[SDL_SCANCODE_S]) {
         direction = DOWN;
-        dy = 1.0f;
+        dy += 1.0f;
         if (currentAnimationFrame == 0) {
             texture = textures[2];
         } else {
             texture = textures[3];
         }
     }
-    if (keystates[SDL_SCANCODE_A]) {
+    else if (keystates[SDL_SCANCODE_A]) {
         direction = LEFT;
-        dx = -1.0f;
+        dx -= 1.0f;
         if (currentAnimationFrame == 0) {
             texture = textures[4];
         } else {
             texture = textures[5];
         }
     }
-    if (keystates[SDL_SCANCODE_D]) {
+    else if (keystates[SDL_SCANCODE_D]) {
         direction = RIGHT;
-        dx = 1.0f;
+        dx += 1.0f;
         if (currentAnimationFrame == 0) {
             texture = textures[6];
         } else {
             texture = textures[7];
         }
     }
+
     if (!keystates[SDL_SCANCODE_W] && !keystates[SDL_SCANCODE_S] &&
         !keystates[SDL_SCANCODE_A] && !keystates[SDL_SCANCODE_D]) {
         idle = true;
@@ -165,9 +171,15 @@ void Player::update()
         dy *= 0.7071f;
     }
 
+    if (keystates[SDL_SCANCODE_LSHIFT])
+        speed = 6;
+    else
+        speed = 3;
+
     app.getCollisionChecker().checkTileCollision(this);
 
     if (!collisionOn) {
+        // printf("SpeedX: %f, SpeedY: %f\n", dx*speed, dy*speed);
         worldX += dx * speed;
         worldY += dy * speed;
     }
