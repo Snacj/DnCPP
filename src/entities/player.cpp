@@ -93,7 +93,47 @@ void Player::update()
     // TODO replace else if with if statement
 
     // Handle Keyboard input
-    if (keystates[SDL_SCANCODE_W]) {
+    if (keystates[SDL_SCANCODE_W] && keystates[SDL_SCANCODE_A]) {
+        direction = UP_LEFT;
+        dx -= 1.0f;
+        dy -= 1.0f;
+        if (currentAnimationFrame == 0) {
+            texture = textures[4];
+        } else {
+            texture = textures[5];
+        }
+    }
+    else if (keystates[SDL_SCANCODE_W] && keystates[SDL_SCANCODE_D]) {
+        direction = UP_RIGHT;
+        dx += 1.0f;
+        dy -= 1.0f;
+        if (currentAnimationFrame == 0) {
+            texture = textures[6];
+        } else {
+            texture = textures[7];
+        }
+    }
+    else if (keystates[SDL_SCANCODE_S] && keystates[SDL_SCANCODE_A]) {
+        direction = DOWN_LEFT;
+        dx -= 1.0f;
+        dy += 1.0f;
+        if (currentAnimationFrame == 0) {
+            texture = textures[4];
+        } else {
+            texture = textures[5];
+        }
+    }
+    else if (keystates[SDL_SCANCODE_S] && keystates[SDL_SCANCODE_D]) {
+        direction = DOWN_RIGHT;
+        dx += 1.0f;
+        dy += 1.0f;
+        if (currentAnimationFrame == 0) {
+            texture = textures[6];
+        } else {
+            texture = textures[7];
+        }
+    }
+    else if (keystates[SDL_SCANCODE_W]) {
         direction = UP;
         dy -= 1.0f;
         if (currentAnimationFrame == 0) {
@@ -145,13 +185,17 @@ void Player::update()
             } else {
                 texture = textures[11];
             }
-        } else if (direction == LEFT) {
+        } else if (direction == LEFT ||
+                direction == UP_LEFT ||
+                direction == DOWN_LEFT) {
             if (currentAnimationFrame == 0) {
                 texture = textures[12];
             } else {
                 texture = textures[13];
             }
-        } else if (direction == RIGHT) {
+        } else if (direction == RIGHT ||
+                direction == UP_RIGHT ||
+                direction == DOWN_RIGHT) {
             if (currentAnimationFrame == 0) {
                 texture = textures[14];
             } else {
@@ -165,16 +209,19 @@ void Player::update()
         debug = !debug;
     }
 
+    // sprinting
+    if (keystates[SDL_SCANCODE_LSHIFT])
+        speed = 6;
+    else
+        speed = 3;
+
     // Normalize diagonal movement
     if (dx != 0 && dy != 0) {
         dx *= 0.7071f;
         dy *= 0.7071f;
     }
 
-    if (keystates[SDL_SCANCODE_LSHIFT])
-        speed = 6;
-    else
-        speed = 3;
+//    printf("Current speedX: %f, Current speedY: %f\n", dx*speed, dy*speed);
 
     app.getCollisionChecker().checkTileCollision(this);
 
