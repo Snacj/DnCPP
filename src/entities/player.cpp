@@ -1,6 +1,4 @@
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_keyboard.h>
-#include <SDL2/SDL_render.h>
 #include <cstdio>
 #include <string>
 #include <vector>
@@ -87,10 +85,6 @@ void Player::update()
 
     float dx = 0;
     float dy = 0;
-
-    // TODO Fix this later to allow diagonal Movement:
-    // currently it breaks the collisionCheker
-    // TODO replace else if with if statement
 
     // Handle Keyboard input
     if (keystates[SDL_SCANCODE_W] && keystates[SDL_SCANCODE_A]) {
