@@ -5,19 +5,9 @@
 #include <vector>
 
 #include "../utils/globals.h"
+#include "entity.h"
 
-enum direction{
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    UP_LEFT,
-    UP_RIGHT,
-    DOWN_LEFT,
-    DOWN_RIGHT,
-};
-
-class Player{
+class Player: public Entity {
 private:
 
     // animation
@@ -39,9 +29,9 @@ private:
 public:
     Player();
 
-    void loadSprites();
-    void setup();
-    void update();
+    void loadSprites() override;
+    void setup() override;
+    void update() override;
     void draw();
 
     // speed
