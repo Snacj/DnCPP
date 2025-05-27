@@ -39,9 +39,12 @@ protected:
 
 
 public:
-    virtual void loadSprites();
-    virtual void setup();
-    virtual void update();
+    Entity();
+    virtual ~Entity();
+
+    virtual void loadSprites() = 0;
+    virtual void setup() = 0;
+    virtual void update() = 0;
     void draw();
 
     // speed

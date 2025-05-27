@@ -3,7 +3,11 @@
 #include "../utils/globals.h"
 #include "entity.h"
 
+Entity::Entity() {}
+Entity::~Entity() {}
+
 void Entity::draw()
+
 {
     SDL_RenderCopy(gRenderer, texture, NULL, &rect);
     // DEBUG
