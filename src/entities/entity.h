@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
 #include <vector>
 
 #include "../utils/globals.h"
@@ -30,6 +31,7 @@ protected:
     bool debug;
 
     // texutre
+    std::vector<std::string> texture_path;
     std::vector<SDL_Texture*> textures;
     SDL_Texture* texture;
 

@@ -1,29 +1,28 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef NPC_H
+#define NPC_H
 
 #include <SDL2/SDL.h>
-#include <vector>
 
 #include "../utils/globals.h"
 #include "entity.h"
 
-class Player: public Entity
+class Npc: public Entity
 {
 private:
-    // player stats
+    // entity stats, texts etc.
 
 public:
-    Player();
+    Npc();
 
     void loadSprites() override;
     void setup() override;
-    void update() override;
+    void update () override;
 
     // speed
     int speed;
 
-    // position
-    int worldX, worldY;
+    //position
+    int wordlX, worldY;
     int screenX, screenY;
 
     int direction;

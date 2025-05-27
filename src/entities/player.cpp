@@ -47,26 +47,24 @@ void Player::setup()
 void Player::loadSprites()
 {
 
-    std::vector<std::string> sprites;
+    texture_path.push_back("player_up_1");
+    texture_path.push_back("player_up_2");
+    texture_path.push_back("player_down_1");
+    texture_path.push_back("player_down_2");
+    texture_path.push_back("player_left_1");
+    texture_path.push_back("player_left_2");
+    texture_path.push_back("player_right_1");
+    texture_path.push_back("player_right_2");
+    texture_path.push_back("player_up_idle_1");
+    texture_path.push_back("player_up_idle_2");
+    texture_path.push_back("player_down_idle_1");
+    texture_path.push_back("player_down_idle_2");
+    texture_path.push_back("player_left_idle_1");
+    texture_path.push_back("player_left_idle_2");
+    texture_path.push_back("player_right_idle_1");
+    texture_path.push_back("player_right_idle_2");
 
-    sprites.push_back("player_up_1");
-    sprites.push_back("player_up_2");
-    sprites.push_back("player_down_1");
-    sprites.push_back("player_down_2");
-    sprites.push_back("player_left_1");
-    sprites.push_back("player_left_2");
-    sprites.push_back("player_right_1");
-    sprites.push_back("player_right_2");
-    sprites.push_back("player_up_idle_1");
-    sprites.push_back("player_up_idle_2");
-    sprites.push_back("player_down_idle_1");
-    sprites.push_back("player_down_idle_2");
-    sprites.push_back("player_left_idle_1");
-    sprites.push_back("player_left_idle_2");
-    sprites.push_back("player_right_idle_1");
-    sprites.push_back("player_right_idle_2");
-
-    textures = tl.loadMedia(sprites);
+    textures = tl.loadMedia(texture_path);
 
 }
 
@@ -223,15 +221,5 @@ void Player::update()
         // printf("SpeedX: %f, SpeedY: %f\n", dx*speed, dy*speed);
         worldX += dx * speed;
         worldY += dy * speed;
-    }
-}
-
-void Player::draw()
-{
-    SDL_RenderCopy(gRenderer, texture, NULL, &rect);
-    // debug
-    if (debug) {
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xAA);
-        SDL_RenderFillRect(gRenderer, &debugSolidArea);
     }
 }
