@@ -10,6 +10,7 @@
 
 Player::Player()
 {
+    this->name = "Player";
 }
 
 void Player::setup()
@@ -80,6 +81,7 @@ void Player::update()
     }
 
     collisionOn = false;
+    idle = false;
 
     float dx = 0;
     float dy = 0;

@@ -9,6 +9,8 @@
 class Npc: public Entity
 {
 private:
+    int randomNumber(int start, int end);
+    int walkingDirection;
     // entity stats, texts etc.
 
 public:

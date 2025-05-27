@@ -8,12 +8,14 @@
 #include "application.h"
 #include "../tiles/tilemanager.h"
 #include "../entities/player.h"
+#include "../entities/npc.h"
 #include "../ui/ui.h"
 
 
 CollisionChecker collisionChecker;
 TileManager tileManager;
 Player player;
+Npc npc;
 UI ui;
 
 Application::Application()
@@ -27,6 +29,9 @@ void Application::setup()
     // player
     player.loadSprites();
     player.setup();
+    // npc
+    npc.loadSprites();
+    npc.setup();
     // tileManager
     tileManager.loadSprites();
     tileManager.loadMap("assets/maps/map.txt");
@@ -73,6 +78,7 @@ void Application::run()
 void Application::update()
 {
     player.update();
+    npc.update();
 }
 
 void Application::draw()
@@ -83,6 +89,7 @@ void Application::draw()
     if(gameState == GAME) {
         tileManager.drawTiles();
         player.draw();
+        npc.draw();
     } else if(gameState == MENU) {
         ui.draw();
     }

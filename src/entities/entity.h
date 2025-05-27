@@ -27,6 +27,8 @@ protected:
     int currentAnimationFrame;
     bool idle;
 
+    int walkingDirectionTimer = 0;
+
     // DEBUG
     bool debug;
 
@@ -48,6 +50,8 @@ public:
     virtual void setup() = 0;
     virtual void update() = 0;
     void draw();
+
+    std::string name = "";
 
     // speed
     int speed;
