@@ -18,19 +18,6 @@ public:
     void loadSprites() override;
     void setup() override;
     void update() override;
-
-    // speed
-    int speed;
-
-    // position
-    int worldX, worldY;
-    int screenX, screenY;
-
-    int direction;
-
-    // collision
-    bool collisionOn;
-    SDL_Rect solidArea;
 };
 
 #endif

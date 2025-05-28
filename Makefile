@@ -10,7 +10,7 @@ OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 DEPS := $(OBJS:.o=.d)
 
 # Output binary
-OBJ_NAME = main
+OBJ_NAME = run
 
 # Compiler and flags
 CC = g++
