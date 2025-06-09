@@ -34,6 +34,14 @@ void UI::createUIElements()
     createButtons();
 }
 
+void UI::draw()
+{
+    SDL_RenderCopy(gRenderer, textures[0], NULL, &background);
+    SDL_RenderCopy(gRenderer, start_game_button.texture, NULL, &start_game_button.destRect);
+    SDL_RenderCopy(gRenderer, quit_game_button.texture, NULL, &quit_game_button.destRect);
+
+}
+
 void UI::createButtons()
 {
     // Start Game Button
@@ -55,14 +63,6 @@ void UI::createButtons()
     quit_game_button.destRect.x = SCREEN_WIDTH / 2 - (quit_game_button.destRect.w / 2);
     quit_game_button.destRect.y = SCREEN_HEIGHT / 2 - (quit_game_button.destRect.h / 2) + 96;
     quit_game_button.originalRect = quit_game_button.destRect;
-
-}
-
-void UI::draw()
-{
-    SDL_RenderCopy(gRenderer, textures[0], NULL, &background);
-    SDL_RenderCopy(gRenderer, start_game_button.texture, NULL, &start_game_button.destRect);
-    SDL_RenderCopy(gRenderer, quit_game_button.texture, NULL, &quit_game_button.destRect);
 
 }
 

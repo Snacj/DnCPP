@@ -3,6 +3,7 @@
 
 #include "textureLoader.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #define ORIGINAL_TILE_SIZE 16 // 16x16 px
 #define SCALE 3
@@ -22,6 +23,7 @@ extern Application app;
 
 extern SDL_Window* gWindow;
 extern SDL_Renderer* gRenderer;
+extern TTF_Font* gFont;
 extern TextureLoader tl;
 
 #endif

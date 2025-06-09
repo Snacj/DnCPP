@@ -19,7 +19,7 @@ std::vector<SDL_Texture*> TextureLoader::loadMedia(std::vector<std::string> path
 
     SDL_Texture* texture;
 
-	//Load PNG texture
+	// Load PNG texture
     for ( std::string path: paths ) {
         std::string fullPath = spritePath + path + fileFormat;
         texture = loadTexture(fullPath);
@@ -29,6 +29,9 @@ std::vector<SDL_Texture*> TextureLoader::loadMedia(std::vector<std::string> path
         }
         textures.push_back(texture);
     }
+
+    // Load font
+    // https://lazyfoo.net/tutorials/SDL/16_true_type_fonts/index.php
 
 	return textures;
 }

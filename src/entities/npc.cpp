@@ -10,7 +10,7 @@
 
 Npc::Npc()
 {
-    this->name = "NPC";
+    name = "NPC";
 }
 
 void Npc::setup()
@@ -25,8 +25,8 @@ void Npc::setup()
     texture = textures[10];
 
     // Spawnpoint
-    worldX = 2 * TILE_SIZE;
-    worldY = 2 * TILE_SIZE;
+    worldX = 22 * TILE_SIZE;
+    worldY = 22 * TILE_SIZE;
 
     rect.x = worldX;
     rect.y = worldY;
@@ -38,7 +38,7 @@ void Npc::setup()
     solidArea.x = 12;
     solidArea.y = 20;
 
-    debug = true;
+    debug = false;
     debugSolidArea = { worldX+solidArea.x, worldY+solidArea.y,
     solidArea.w, solidArea.h};
 }
@@ -92,7 +92,7 @@ void Npc::update()
     float dx = 0;
     float dy = 0;
 
-    // TODO: implement basic AI
+    // basic walking "AI"
     walkingDirectionTimer++;
     if (walkingDirectionTimer >= 50) {
         walkingDirectionTimer = 0;
@@ -101,35 +101,7 @@ void Npc::update()
     }
 
     if (walkingDirection <= 7) {
-        if (direction == UP) {
-            dy -= 1;
-            if (currentAnimationFrame == 0) {
-                texture = textures[0];
-            } else {
-                texture = textures[1];
-            }
-        } else if (direction == DOWN) {
-            dy += 1;
-            if (currentAnimationFrame == 0) {
-                texture = textures[2];
-            } else {
-                texture = textures[3];
-            }
-        } else if (direction == LEFT) {
-            dx -= 1;
-            if (currentAnimationFrame == 0) {
-                texture = textures[4];
-            } else {
-                texture = textures[5];
-            }
-        } else if (direction == RIGHT) {
-            dx += 1;
-            if (currentAnimationFrame == 0) {
-                texture = textures[6];
-            } else {
-                texture = textures[7];
-            }
-        } else if (direction == UP_LEFT) {
+        if (direction == UP_LEFT) {
             dx -= 1;
             dy -= 1;
             if (currentAnimationFrame == 0) {
@@ -156,6 +128,34 @@ void Npc::update()
         } else if (direction == DOWN_RIGHT) {
             dx += 1;
             dy += 1;
+            if (currentAnimationFrame == 0) {
+                texture = textures[6];
+            } else {
+                texture = textures[7];
+            }
+        } else if (direction == UP) {
+            dy -= 1;
+            if (currentAnimationFrame == 0) {
+                texture = textures[0];
+            } else {
+                texture = textures[1];
+            }
+        } else if (direction == DOWN) {
+            dy += 1;
+            if (currentAnimationFrame == 0) {
+                texture = textures[2];
+            } else {
+                texture = textures[3];
+            }
+        } else if (direction == LEFT) {
+            dx -= 1;
+            if (currentAnimationFrame == 0) {
+                texture = textures[4];
+            } else {
+                texture = textures[5];
+            }
+        } else if (direction == RIGHT) {
+            dx += 1;
             if (currentAnimationFrame == 0) {
                 texture = textures[6];
             } else {
@@ -200,17 +200,17 @@ void Npc::update()
     app.getCollisionChecker().checkTileCollision(this);
 
     if (!collisionOn) {
-        this->worldX += dx * speed;
-        this->worldY += dy * speed;
+        worldX += dx * speed;
+        worldY += dy * speed;
 
         screenX = worldX - app.getPlayer().worldX + app.getPlayer().screenX;
         screenY = worldY - app.getPlayer().worldY + app.getPlayer().screenY;
 
-        this->rect.x = screenX;
-        this->rect.y = screenY;
-        this->debugSolidArea.x = screenX;
-        this->debugSolidArea.y = screenY;
-    }
+        rect.x = screenX;
+        rect.y = screenY;
 
+        debugSolidArea.x = screenX + solidArea.x;
+        debugSolidArea.y = screenY + solidArea.y;
+    }
 }
 

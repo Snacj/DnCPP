@@ -14,16 +14,12 @@ void CollisionChecker::checkTileCollision(Entity* entity)
     int entityTopWorldY = entity->worldY + entity->solidArea.y;
     int entityBottomWorldY = entity->worldY + entity->solidArea.y + entity->solidArea.h;
 
-    // printf("Name: %s WorldX: %d, WorldY: %d\n", entity->name.c_str(), entity->worldX, entity->worldY);
-
     int entityLeftCol = entityLeftWorldX / TILE_SIZE;
     int entityRightCol = entityRightWorldX / TILE_SIZE;
     int entityTopRow = entityTopWorldY / TILE_SIZE;
     int entityBottomRow = entityBottomWorldY / TILE_SIZE;
 
     int tileNum1, tileNum2, tileNum3, tileNum4;
-
-    //printf("eLeftCol: %d, eRightCol: %d, eTopRow: %d, eBottomRow: %d\n", entityLeftCol, entityRightCol, entityTopRow, entityBottomRow);
 
     switch (entity->direction) {
         case UP:

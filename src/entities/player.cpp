@@ -10,7 +10,7 @@
 
 Player::Player()
 {
-    this->name = "Player";
+    name = "Player";
 }
 
 void Player::setup()

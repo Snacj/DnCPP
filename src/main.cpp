@@ -5,6 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
+#include <SDL2/SDL_ttf.h>
 #include <cstdlib>
 #include <stdio.h>
 
@@ -58,6 +59,11 @@ bool init()
             printf("Renderer could not be created! %s", SDL_GetError());
         SDL_SetRenderDrawColor(gRenderer, 255, 0, 0, 255);
 	}
+
+    if( TTF_Init() == -1 ) {
+        printf("SDL_TTF could not be initialized %s\n", TTF_GetError());
+        success = false;
+    }
 
 	return success;
 }
