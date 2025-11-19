@@ -5,14 +5,14 @@
 #include <string>
 #include <vector>
 
-class TextureLoader
-{
-    private:
-        SDL_Texture* loadTexture( std::string path );
-    public:
-        TextureLoader();
+class TextureLoader {
+  private:
+    SDL_Texture *loadTexture(std::string path);
 
-        std::vector<SDL_Texture*> loadMedia( std::vector<std::string> );
+  public:
+    TextureLoader();
+
+    std::vector<SDL_Texture *> loadMedia(std::vector<std::string>);
 };
 
 #endif

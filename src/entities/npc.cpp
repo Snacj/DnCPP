@@ -1,20 +1,16 @@
 #include <SDL2/SDL.h>
 #include <random>
 
+#include "../main/application.h"
+#include "../utils/globals.h"
+#include "../utils/textureLoader.h"
 #include "entity.h"
 #include "npc.h"
 #include "player.h"
-#include "../main/application.h"
-#include "../utils/textureLoader.h"
-#include "../utils/globals.h"
 
-Npc::Npc()
-{
-    name = "NPC";
-}
+Npc::Npc() { name = "NPC"; }
 
-void Npc::setup()
-{
+void Npc::setup() {
     animationTimer = 0;
     currentAnimationFrame = 1;
 
@@ -39,12 +35,11 @@ void Npc::setup()
     solidArea.y = 20;
 
     debug = false;
-    debugSolidArea = { worldX+solidArea.x, worldY+solidArea.y,
-    solidArea.w, solidArea.h};
+    debugSolidArea = {worldX + solidArea.x, worldY + solidArea.y, solidArea.w,
+                      solidArea.h};
 }
 
-void Npc::loadSprites()
-{
+void Npc::loadSprites() {
 
     texture_path.push_back("player_up_1");
     texture_path.push_back("player_up_2");
@@ -64,11 +59,9 @@ void Npc::loadSprites()
     texture_path.push_back("player_right_idle_2");
 
     textures = tl.loadMedia(texture_path);
-
 }
 
-int Npc::randomNumber(int start, int end)
-{
+int Npc::randomNumber(int start, int end) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(start, end);
@@ -78,8 +71,7 @@ int Npc::randomNumber(int start, int end)
     return randomNum;
 }
 
-void Npc::update()
-{
+void Npc::update() {
     animationTimer++;
     if (animationTimer >= 15) {
         animationTimer = 0;
@@ -213,4 +205,3 @@ void Npc::update()
         debugSolidArea.y = screenY + solidArea.y;
     }
 }
-

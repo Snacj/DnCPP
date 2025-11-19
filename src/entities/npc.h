@@ -6,19 +6,18 @@
 #include "../utils/globals.h"
 #include "entity.h"
 
-class Npc: public Entity
-{
-private:
+class Npc : public Entity {
+  private:
     int randomNumber(int start, int end);
     int walkingDirection;
     // entity stats, texts etc.
 
-public:
+  public:
     Npc();
 
     void loadSprites() override;
     void setup() override;
-    void update () override;
+    void update() override;
 };
 
 #endif

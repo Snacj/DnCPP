@@ -6,32 +6,30 @@
 #include <string>
 #include <vector>
 
+#include "../main/application.h"
 #include "../utils/globals.h"
 #include "../utils/textureLoader.h"
-#include "../main/application.h"
 #include "tilemanager.h"
 
-TileManager::TileManager()
-{
+TileManager::TileManager() {}
 
-}
-
-void TileManager::loadMap( std::string path )
-{
+void TileManager::loadMap(std::string path) {
     std::ifstream file(path);
 
-    if (!file.is_open()) printf("Error opening Map file.");
+    if (!file.is_open())
+        printf("Error opening Map file.");
 
     std::string line;
-    while(std::getline(file,line)) {
-        if (line.empty()) continue;
+    while (std::getline(file, line)) {
+        if (line.empty())
+            continue;
 
         std::vector<int> row;
         std::stringstream ss(line);
         std::string value;
 
-        while(std::getline(ss, value, ',')) {
-            if(!value.empty()) {
+        while (std::getline(ss, value, ',')) {
+            if (!value.empty()) {
                 row.push_back(std::stoi(value));
             }
         }
@@ -42,8 +40,7 @@ void TileManager::loadMap( std::string path )
     file.close();
 }
 
-void TileManager::loadSprites()
-{
+void TileManager::loadSprites() {
     tiles.push_back("grass");
     tiles.push_back("dirt");
     tiles.push_back("stone");
@@ -51,11 +48,9 @@ void TileManager::loadSprites()
     tiles.push_back("tree");
 
     textures = tl.loadMedia(tiles);
-
 }
 
-void TileManager::drawTiles()
-{
+void TileManager::drawTiles() {
     int worldCol = 0;
     int worldRow = 0;
     SDL_Rect destRect;
@@ -69,15 +64,17 @@ void TileManager::drawTiles()
         int screenX = worldX - app.getPlayer().worldX + app.getPlayer().screenX;
         int screenY = worldY - app.getPlayer().worldY + app.getPlayer().screenY;
 
-        if(worldX + TILE_SIZE > app.getPlayer().worldX - app.getPlayer().screenX &&
-            worldX - TILE_SIZE < app.getPlayer().worldX + app.getPlayer().screenX &&
-            worldY + TILE_SIZE > app.getPlayer().worldY - app.getPlayer().screenY &&
-            worldY - TILE_SIZE < app.getPlayer().worldY + app.getPlayer().screenY)
-        {
+        if (worldX + TILE_SIZE >
+                app.getPlayer().worldX - app.getPlayer().screenX &&
+            worldX - TILE_SIZE <
+                app.getPlayer().worldX + app.getPlayer().screenX &&
+            worldY + TILE_SIZE >
+                app.getPlayer().worldY - app.getPlayer().screenY &&
+            worldY - TILE_SIZE <
+                app.getPlayer().worldY + app.getPlayer().screenY) {
             destRect.x = screenX;
             destRect.y = screenY;
             SDL_RenderCopy(gRenderer, textures[tileNum], NULL, &destRect);
-
         }
 
         worldCol++;
@@ -85,6 +82,5 @@ void TileManager::drawTiles()
             worldCol = 0;
             worldRow++;
         }
-
     }
 }

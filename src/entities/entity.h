@@ -18,10 +18,8 @@ enum direction {
     DOWN_RIGHT = 7,
 };
 
-class Entity
-{
-protected:
-
+class Entity {
+  protected:
     // animation
     int animationTimer;
     int currentAnimationFrame;
@@ -34,15 +32,14 @@ protected:
 
     // texutre
     std::vector<std::string> texture_path;
-    std::vector<SDL_Texture*> textures;
-    SDL_Texture* texture;
+    std::vector<SDL_Texture *> textures;
+    SDL_Texture *texture;
 
     // entity
     SDL_Rect rect;
     SDL_Rect debugSolidArea;
 
-
-public:
+  public:
     Entity();
     virtual ~Entity();
 

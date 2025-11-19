@@ -1,16 +1,15 @@
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
-#include <SDL2/SDL.h>
 
-#include "application.h"
-#include "../tiles/tilemanager.h"
-#include "../entities/player.h"
 #include "../entities/npc.h"
+#include "../entities/player.h"
+#include "../tiles/tilemanager.h"
 #include "../ui/ui.h"
-
+#include "application.h"
 
 CollisionChecker collisionChecker;
 TileManager tileManager;
@@ -18,13 +17,9 @@ Player player;
 Npc npc;
 UI ui;
 
-Application::Application()
-{
+Application::Application() {}
 
-}
-
-void Application::setup()
-{
+void Application::setup() {
     // Setup
     // player
     player.loadSprites();
@@ -43,27 +38,24 @@ void Application::setup()
     gameState = MENU;
 }
 
-void Application::run()
-{
+void Application::run() {
     // Event Handler
     SDL_Event e;
 
     // Main gameloop
-    while( !quit )
-    {
+    while (!quit) {
         // This has to be first
         Uint32 frameStart = SDL_GetTicks();
         // Handle all events in queue
-        while( SDL_PollEvent( &e ) != 0)
-        {
+        while (SDL_PollEvent(&e) != 0) {
             // Allows the user to quit
-            if ( e.type == SDL_QUIT )
+            if (e.type == SDL_QUIT)
                 quit = true;
-            if ( e.key.keysym.sym == SDLK_ESCAPE )
+            if (e.key.keysym.sym == SDLK_ESCAPE)
                 gameState = MENU;
-            if ( e.key.keysym.sym == SDLK_RETURN )
+            if (e.key.keysym.sym == SDLK_RETURN)
                 gameState = GAME;
-            if ( gameState == MENU)
+            if (gameState == MENU)
                 ui.handleMainMenuEvents(&e);
         }
         update();
@@ -71,38 +63,33 @@ void Application::run()
         // This has to be last
         // 60 FPS
         Uint32 frameTime = SDL_GetTicks() - frameStart;
-        if (frameTime < 1000/60) SDL_Delay(1000/60 - frameTime);
+        if (frameTime < 1000 / 60)
+            SDL_Delay(1000 / 60 - frameTime);
     }
 }
 
-void Application::update()
-{
+void Application::update() {
     player.update();
     npc.update();
 }
 
-void Application::draw()
-{
+void Application::draw() {
     SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_RenderClear(gRenderer);
 
-    if(gameState == GAME) {
+    if (gameState == GAME) {
         tileManager.drawTiles();
         player.draw();
         npc.draw();
-    } else if(gameState == MENU) {
+    } else if (gameState == MENU) {
         ui.draw();
     }
 
     SDL_RenderPresent(gRenderer);
 }
 
-Player& Application::getPlayer()
-{
-    return player;
-}
+Player &Application::getPlayer() { return player; }
 
-CollisionChecker& Application::getCollisionChecker()
-{
+CollisionChecker &Application::getCollisionChecker() {
     return collisionChecker;
 }

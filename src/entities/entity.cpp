@@ -9,8 +9,8 @@ Entity::~Entity() {}
 void Entity::draw()
 
 {
-  if (screenX + TILE_SIZE > 0 && screenX < SCREEN_WIDTH &&
-      screenY + TILE_SIZE > 0 && screenY < SCREEN_HEIGHT) {
+    if (screenX + TILE_SIZE > 0 && screenX < SCREEN_WIDTH &&
+        screenY + TILE_SIZE > 0 && screenY < SCREEN_HEIGHT) {
 
         SDL_RenderCopy(gRenderer, texture, NULL, &rect);
         // DEBUG

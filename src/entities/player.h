@@ -7,12 +7,11 @@
 #include "../utils/globals.h"
 #include "entity.h"
 
-class Player: public Entity
-{
-private:
+class Player : public Entity {
+  private:
     // player stats
 
-public:
+  public:
     Player();
 
     void loadSprites() override;

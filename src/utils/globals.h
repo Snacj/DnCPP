@@ -21,10 +21,9 @@
 class Application;
 extern Application app;
 
-extern SDL_Window* gWindow;
-extern SDL_Renderer* gRenderer;
-extern TTF_Font* gFont;
+extern SDL_Window *gWindow;
+extern SDL_Renderer *gRenderer;
+extern TTF_Font *gFont;
 extern TextureLoader tl;
 
 #endif
-

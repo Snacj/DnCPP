@@ -4,27 +4,26 @@
 #include <SDL2/SDL.h>
 #include <thread>
 
-#include "collisionChecker.h"
 #include "../entities/player.h"
+#include "collisionChecker.h"
 
 enum gameState {
     MENU,
     GAME,
 };
 
-class Application
-{
-private:
+class Application {
+  private:
     void update();
     void draw();
 
     std::thread gameThread;
 
-public:
+  public:
     Application();
 
-    Player& getPlayer();
-    CollisionChecker& getCollisionChecker();
+    Player &getPlayer();
+    CollisionChecker &getCollisionChecker();
     void setup();
     void run();
 
